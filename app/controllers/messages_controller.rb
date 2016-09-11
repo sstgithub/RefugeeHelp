@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
           User.all.each do |user|
             user.update_attributes(current: false)
           end
-          render json: @message, meta: {"complete": true, "requester_number": requester.phone_num, "giver_number": giver.phone_num, "distance": distance}
+          render :json => {"complete": true, "requester_number": requester.phone_num, "giver_number": @message.phone_num, "distance": distance}
         end
         User.create(lat: @message.lat, long: @message.long, category_name: @message.category_name, user_type: @message.user_type, phone_num: @message.phone_num, current: true)
       end

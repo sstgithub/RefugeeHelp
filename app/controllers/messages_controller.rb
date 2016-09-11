@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
           User.all.each do |user|
             user.update_attributes(current: false)
           end
-          map_link = "https://www.mapquestapi.com/staticmap/v4/getmap?size=600,500&type=map&pois=poi-blue-s,#{@message.lat},#{@message.lat}|&poi-red_1,#{requester.first.lat},#{requester.first.long}|&zoom=8&imagetype=JPEG&key=UShjaMayAC4UkuBJ5nu5rqFuraxzEOQU"
+          map_link = "https://www.mapquestapi.com/staticmap/v4/getmap?size=600,500&type=map&pois=pcenter,#{requester.first.lat},#{requester.first.long}|mcenter,#{@message.lat},#{@message.long}|&zoom=9&imagetype=JPEG&key=UShjaMayAC4UkuBJ5nu5rqFuraxzEOQU"
           render :json => {"complete": true, "requester_number": requester.first.phone_num, "giver_number": @message.phone_num, "distance": distance, "map_link": map_link}
           return
         end

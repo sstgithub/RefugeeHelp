@@ -32,7 +32,10 @@ class MessagesController < ApplicationController
       requester = User.where(category: @message.category, current: true, user_type: "requester")
       if !requester.empty
         distance = Geocoder::Calculations.distance_between([@message.lat, @message.long], [requester.first.lat, requester.first.long])
-        if distance
+        if distance < 100
+          User.all.each do |user|
+            user.update_attributes(current: false)
+          end
           render json: {"complete": true, "requester_number": requester.phone_num, "giver_number": giver.phone_num, "distance": distance}
         end
         User.create(lat: @message.lat, long: @message.long, category_name: @message.category_name, user_type: @message.user_type, phone_num: @message.phone_num, current: true)

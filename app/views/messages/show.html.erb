@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @message.lat %>
+</p>
+
+<p>
+  <strong>Long:</strong>
+  <%= @message.long %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @message.user_type %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @message.category_name %>
+</p>
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

@@ -5,8 +5,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.float :lat
       t.float :long
-      t.string :type
+      t.string :user_type
       t.string :category_name
+      t.boolean :current
+      t.string :phone_num
 
       t.timestamps null: false
     end

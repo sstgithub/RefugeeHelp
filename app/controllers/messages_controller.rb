@@ -32,12 +32,12 @@ class MessagesController < ApplicationController
       requester = User.where(category_name: @message.category_name, current: true, user_type: "requester")
       if requester.count > 0
         distance = Geocoder::Calculations.distance_between([@message.lat, @message.long], [requester.first.lat, requester.first.long])
-        puts "THIS IS DISTANCE: #{distance}"
         if distance < 100
           User.all.each do |user|
             user.update_attributes(current: false)
           end
-          render :json => {"complete": true, "requester_number": requester.first.phone_num, "giver_number": @message.phone_num, "distance": distance}
+          map_link = "https://www.mapquestapi.com/staticmap/v4/getmap?size=600,500&type=map&pois=poi-blue-s,#{@message.lat},#{@message.lat}|&poi-red_1,#{requester.first.lat},#{requester.first.long}|&zoom=8&imagetype=JPEG&key=UShjaMayAC4UkuBJ5nu5rqFuraxzEOQU"
+          render :json => {"complete": true, "requester_number": requester.first.phone_num, "giver_number": @message.phone_num, "distance": distance, "map_link": map_link}
           return
         end
         User.create(lat: @message.lat, long: @message.long, category_name: @message.category_name, user_type: @message.user_type, phone_num: @message.phone_num, current: true)

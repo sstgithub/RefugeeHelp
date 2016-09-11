@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.float :lat
       t.float :long
-      t.string :user_type
+      t.string :type
       t.string :category_name
 
       t.timestamps null: false

@@ -43,6 +43,7 @@ class MessagesController < ApplicationController
         User.create(lat: @message.lat, long: @message.long, category_name: @message.category_name, user_type: @message.user_type, phone_num: @message.phone_num, current: true)
       end
     else
+      Coord.create(lat: @message.lat, long: @message.long)
       User.create(lat: @message.lat, long: @message.long, category_name: @message.category_name, user_type: @message.user_type, phone_num: @message.phone_num, current: true)
     end
 

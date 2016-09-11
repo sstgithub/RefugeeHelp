@@ -30,8 +30,9 @@ class MessagesController < ApplicationController
     #this assumes only one message from user
     if @message.user_type == "giver"
       requester = User.where(category_name: @message.category_name, current: true, user_type: "requester")
-      if requester.count > 0 
+      if requester.count > 0
         distance = Geocoder::Calculations.distance_between([@message.lat, @message.long], [requester.first.lat, requester.first.long])
+        puts "THIS IS DISTANCE: #{{distance}}"
         if distance < 100
           User.all.each do |user|
             user.update_attributes(current: false)
